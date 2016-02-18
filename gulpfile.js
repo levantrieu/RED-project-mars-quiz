@@ -1,31 +1,33 @@
 var gulp = require('gulp');
-		uglify = require('gulp-uglify');
-		babel = require('gulp-babel');
 		notify = require('gulp-notify');
     rename = require('gulp-rename');
 		sass = require('gulp-sass');
 		autoprefixer = require('gulp-autoprefixer');
 		minifyCSS = require('gulp-cssnano');
-		browserify = require('gulp-browserify');
 		browserSync = require('browser-sync');
 		plumber = require('gulp-plumber');
-
+		webpack = require('webpack-stream');
 
 gulp.task('compile-react', function() {
 	return gulp.src('./js/main.jsx')
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: <%= error.message %>"
 		)}))
-		.pipe(babel({
-			presets: ['es2015', 'react']
+		.pipe(webpack({
+			output: {
+				filename: 'main.js'
+			},
+			module: {
+				loaders: [{
+					test: /\.jsx?$/,
+					exclude: /node-modules/,
+					loader: 'babel-loader',
+					query: {
+						presets: ['react', 'es2015']
+					}
+				}]
+			}
 		}))
-		.pipe(browserify({
-			insertGlobals: true,
-			debug: true
-		}))
-		.pipe(gulp.dest('./build/scripts'))
-		.pipe(uglify())
-		.pipe(rename('main.min.js'))
 		.pipe(gulp.dest('./build/scripts'));
 });
 
@@ -50,7 +52,7 @@ gulp.task('browser-sync', ['compile-react'], function() {
   });
 
 	gulp.watch(['./scss/**/*.scss'], ['sass']);
-	gulp.watch(['./js/main.jsx'], ['compile-react']);
+	gulp.watch(['./js/**/*.jsx'], ['compile-react']);
 	gulp.watch(['./build/scripts/main.js', 'index.html', './build/css/style.css']).on('change', browserSync.reload);
 });
 

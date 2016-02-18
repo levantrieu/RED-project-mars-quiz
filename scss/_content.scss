@@ -33,6 +33,14 @@ h1 {
   z-index: -10;
 }
 
+.rainbow {
+  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  color:transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
 .logo-container {
   font-size: 3.75rem;
   color: #fff;
@@ -41,6 +49,11 @@ h1 {
   height: 6rem;
   background: linear-gradient(#fd746c, #ff9068);
   border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff,
+	            0 0 0 4px #fd746c,
+	            0 0 0 9px #edf1f2,
+              -4px 4px 8px 5px rgba(0, 0, 0, 0.2),
+              -8px 4px 8px 5px rgba(0, 0, 0, 0.1);
   align-self: center;
   display: flex;
   justify-content: center;
@@ -81,18 +94,30 @@ button {
   font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
   font-weight: bold;
-  color: #000;
+  color: #fff;
   text-transform: uppercase;
+  background: linear-gradient(to right, #fd746c, #ff9068);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+  border: 2px solid #edf1f2;
+  border-radius: 8px;
+  cursor: pointer;
+	transition: all 0.3s ease 0s;
   padding: 0 2rem;
   height: 3rem;
   width:auto;
 	overflow:visible;
+
+  &:hover {
+    color: #fff;
+    background: linear-gradient(to left, #fd746c, #ff9068);
+  }
 }
 
 .timer {
   width:10rem;
   height: 3.5rem;
-  background-color: #000;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 20px rgba(253, 116, 108, 0.8);
   padding: 0.5rem;
 	overflow:visible;
   position: absolute;
@@ -105,8 +130,8 @@ button {
 .countdown {
   font-family: 'Orbitron', sans-serif;
   font-size: 2rem;
-  color: #90EE90;
-  text-shadow: 0 0 2px #00FF00, 0 0 8px rgba(0, 255, 0, 0.5), 0 0 10px rgba(0, 255, 0, 0.8);
+  color: #ff9068;
+  text-shadow: 0 0 4px #fff, 0 0 8px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.8);
   padding-top: 0.4rem;
   align-self: center;
 }
