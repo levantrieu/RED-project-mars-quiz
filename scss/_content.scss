@@ -1,0 +1,112 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar {
+  display: none;
+
+  @include desktop {
+    position: relative;
+    flex: 1 0 10%;
+    min-width: 9.375rem;
+    max-width: 9.375rem;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+}
+
+h1 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 6.25rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: -0.6rem;
+  color:#EDF1F2;
+  transform: translateX(-75px) rotate(270deg);
+  position: absolute;
+  top: 100px;
+  display: block;
+  z-index: -10;
+}
+
+.logo-container {
+  font-size: 3.75rem;
+  color: #fff;
+  transform: rotate(270deg);
+  width: 6rem;
+  height: 6rem;
+  background: linear-gradient(#fd746c, #ff9068);
+  border-radius: 50%;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 0 1px 0 #ccc,
+               0 2px 0 #c9c9c9,
+               0 3px 0 #bbb,
+               0 4px 0 #b9b9b9,
+               0 5px 0 #aaa,
+               0 6px 0 #9A9A9A,
+               0 7px 1px rgba(0, 0, 0, 0.1),
+               0 0 5px rgba(0, 0, 0, 0.1),
+               0 1px 3px rgba(0, 0, 0, 0.3),
+               0 3px 5px rgba(0, 0, 0, 0.2),
+               0 5px 10px rgba(0, 0, 0, 0.25),
+               0 10px 10px rgba(0, 0, 0, 0.2),
+               0 20px 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-area {
+  width: 100%;
+  background: linear-gradient(to right, #fd746c, #ff9068);
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+
+    @include desktop {
+      flex: 0 1 90%;
+  }
+}
+
+.button-container {
+  align-self: center;
+}
+
+button {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
+  text-transform: uppercase;
+  padding: 0 2rem;
+  height: 3rem;
+  width:auto;
+	overflow:visible;
+}
+
+.timer {
+  width:10rem;
+  height: 3.5rem;
+  background-color: #000;
+  padding: 0.5rem;
+	overflow:visible;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.countdown {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #90EE90;
+  text-shadow: 0 0 2px #00FF00, 0 0 8px rgba(0, 255, 0, 0.5), 0 0 10px rgba(0, 255, 0, 0.8);
+  padding-top: 0.4rem;
+  align-self: center;
+}
