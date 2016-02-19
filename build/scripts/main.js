@@ -60,6 +60,14 @@
 
 	var _questions2 = _interopRequireDefault(_questions);
 
+	var _welcome = __webpack_require__(217);
+
+	var _welcome2 = _interopRequireDefault(_welcome);
+
+	var _ = __webpack_require__(218);
+
+	var _2 = _interopRequireDefault(_);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var MarsQuiz = _react2.default.createClass({
@@ -67,7 +75,14 @@
 
 
 	  render: function render() {
-	    return _react2.default.createElement(_questions2.default, null);
+	    return _react2.default.createElement(
+	      _reactRouter.Router,
+	      { history: _reactRouter.browserHistory },
+	      _react2.default.createElement(_reactRouter.Redirect, { from: '/', to: '/welcome' }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/mars-test', component: _questions2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/welcome', component: _welcome2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '*', component: _2.default })
+	    );
 	  }
 	});
 
@@ -25005,18 +25020,72 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(158);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _reactRouter = __webpack_require__(159);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	//Component
 
 	var Questions = _react2.default.createClass({
 	  displayName: 'Questions',
+
+
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'container' },
+	      _react2.default.createElement(
+	        'section',
+	        { className: 'sidebar' },
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Mars'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'logo-container' },
+	          _react2.default.createElement('i', { className: 'fa fa-space-shuttle' })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'section',
+	        { className: 'content-area' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'timer' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'countdown' },
+	            '10:00'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'Quiz questions goes here'
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Questions;
+
+/***/ },
+/* 217 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//Component
+
+	var Welcome = _react2.default.createClass({
+	  displayName: 'Welcome',
 
 
 	  render: function render() {
@@ -25063,7 +25132,32 @@
 	  }
 	});
 
-	module.exports = Questions;
+	module.exports = Welcome;
+
+/***/ },
+/* 218 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//Component
+
+	var NotFound = _react2.default.createClass({
+	  displayName: 'NotFound',
+
+
+	  render: function render() {
+	    return "";
+	  }
+	});
+
+	module.exports = NotFound;
 
 /***/ }
 /******/ ]);

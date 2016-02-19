@@ -4,7 +4,7 @@ import React from 'react';
 
 //Component
 
-var Questions = React.createClass({
+var Welcome = React.createClass({
 
   render: function() {
     return (
@@ -19,8 +19,8 @@ var Questions = React.createClass({
           <div className="timer">
             <div className="countdown">10:00</div>
           </div>
-          <div>
-            Quiz questions goes here
+          <div className="button-container">
+            <button>Take the Quiz</button>
           </div>
         </section>
       </div>
@@ -28,4 +28,4 @@ var Questions = React.createClass({
   }
 });
 
-module.exports = Questions;
+module.exports = Welcome;
