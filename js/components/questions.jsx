@@ -1,6 +1,9 @@
 'use strict'
 
 import React from 'react';
+import browserHistory from 'react-router';
+import Timer from './timer.jsx';
+
 
 //Component
 
@@ -8,21 +11,11 @@ var Questions = React.createClass({
 
   render: function() {
     return (
-      <div className="container">
-        <section className="sidebar">
-          <h1>Mars</h1>
-          <div className="logo-container">
-            <i className="fa fa-space-shuttle"></i>
-          </div>
-        </section>
-        <section className="content-area">
-          <div className="timer">
-            <div className="countdown">10:00</div>
-          </div>
-          <div>
-            Quiz questions goes here
-          </div>
-        </section>
+      <div>
+        <div className="timer">
+          <div className="countdown"><Timer /></div>
+        </div>
+        <button>Begin the Quiz</button>
       </div>
     );
   }

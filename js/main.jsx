@@ -8,6 +8,7 @@ import { Router, Route, browserHistory, Redirect } from 'react-router';
 
 import Questions from './components/questions.jsx';
 import Welcome   from './components/welcome.jsx';
+import Timer   from './components/timer.jsx';
 import NotFound  from './components/404.jsx';
 
 var MarsQuiz = React.createClass({
@@ -16,12 +17,13 @@ var MarsQuiz = React.createClass({
     return (
       <Router history={browserHistory}>
         <Redirect from='/' to='/welcome' />
-        <Route path='/mars-test' component={Questions} />
         <Route path='/welcome' component={Welcome} />
+        <Route path='/questions' component={Questions} />
+        <Route path='/timer' component={Timer} />
         <Route path='*' component={NotFound} />
       </Router>
     )
   }
 });
 
-ReactDOM.render(<MarsQuiz />, document.querySelector('.mount-node'));
+ReactDOM.render(<MarsQuiz />, document.querySelector('.content-area'));

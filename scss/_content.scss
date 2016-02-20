@@ -13,9 +13,11 @@
     flex: 1 0 10%;
     min-width: 9.375rem;
     max-width: 9.375rem;
+    box-shadow: 5px 0px 10px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
+    z-index: 100;
   }
 }
 
@@ -33,14 +35,6 @@ h1 {
   z-index: -10;
 }
 
-.rainbow {
-  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
-  background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
-  color:transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
 .logo-container {
   font-size: 3.75rem;
   color: #fff;
@@ -51,9 +45,9 @@ h1 {
   border-radius: 50%;
   box-shadow: 0 0 0 2px #fff,
 	            0 0 0 4px #fd746c,
-	            0 0 0 9px #edf1f2,
-              -4px 4px 8px 5px rgba(0, 0, 0, 0.2),
-              -8px 4px 8px 5px rgba(0, 0, 0, 0.1);
+	            0 0 0 7px #fff,
+              0px 0px 10px 4px rgba(0, 0, 0, 0.4),
+              0px 0px 16px 8px rgba(0, 0, 0, 0.1);
   align-self: center;
   display: flex;
   justify-content: center;
@@ -78,16 +72,19 @@ h1 {
   background: linear-gradient(to right, #fd746c, #ff9068);
   position: relative;
   display: flex;
-  flex-flow: column nowrap;
   justify-content: center;
+  align-items: center;
+
+  .question-page {
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(to left, #fd746c, #ff9068);
+    transition: background 0.4s ease 4s;
+  }
 
     @include desktop {
       flex: 0 1 90%;
   }
-}
-
-.button-container {
-  align-self: center;
 }
 
 button {
@@ -131,7 +128,11 @@ button {
   font-family: 'Orbitron', sans-serif;
   font-size: 2rem;
   color: #ff9068;
-  text-shadow: 0 0 4px #fff, 0 0 8px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 4px #fff,
+               0 0 8px rgba(255, 255, 255, 0.5),
+               0 0 10px rgba(255, 255, 255, 0.8);
   padding-top: 0.4rem;
-  align-self: center;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
 }

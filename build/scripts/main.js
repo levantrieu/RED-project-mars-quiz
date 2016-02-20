@@ -60,15 +60,21 @@
 
 	var _questions2 = _interopRequireDefault(_questions);
 
-	var _welcome = __webpack_require__(217);
+	var _welcome = __webpack_require__(218);
 
 	var _welcome2 = _interopRequireDefault(_welcome);
 
-	var _ = __webpack_require__(218);
+	var _timer = __webpack_require__(217);
+
+	var _timer2 = _interopRequireDefault(_timer);
+
+	var _ = __webpack_require__(219);
 
 	var _2 = _interopRequireDefault(_);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//Components
 
 	var MarsQuiz = _react2.default.createClass({
 	  displayName: 'MarsQuiz',
@@ -79,16 +85,15 @@
 	      _reactRouter.Router,
 	      { history: _reactRouter.browserHistory },
 	      _react2.default.createElement(_reactRouter.Redirect, { from: '/', to: '/welcome' }),
-	      _react2.default.createElement(_reactRouter.Route, { path: '/mars-test', component: _questions2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/welcome', component: _welcome2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/questions', component: _questions2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/timer', component: _timer2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '*', component: _2.default })
 	    );
 	  }
 	});
 
-	//Components
-
-	_reactDom2.default.render(_react2.default.createElement(MarsQuiz, null), document.querySelector('.mount-node'));
+	_reactDom2.default.render(_react2.default.createElement(MarsQuiz, null), document.querySelector('.content-area'));
 
 /***/ },
 /* 1 */
@@ -25020,6 +25025,14 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(159);
+
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
+
+	var _timer = __webpack_require__(217);
+
+	var _timer2 = _interopRequireDefault(_timer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	//Component
@@ -25031,38 +25044,20 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'container' },
+	      null,
 	      _react2.default.createElement(
-	        'section',
-	        { className: 'sidebar' },
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'Mars'
-	        ),
+	        'div',
+	        { className: 'timer' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'logo-container' },
-	          _react2.default.createElement('i', { className: 'fa fa-space-shuttle' })
+	          { className: 'countdown' },
+	          _react2.default.createElement(_timer2.default, null)
 	        )
 	      ),
 	      _react2.default.createElement(
-	        'section',
-	        { className: 'content-area' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'timer' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'countdown' },
-	            '10:00'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          'Quiz questions goes here'
-	        )
+	        'button',
+	        null,
+	        'Begin the Quiz'
 	      )
 	    );
 	  }
@@ -25082,51 +25077,90 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var Timer = _react2.default.createClass({
+	  displayName: 'Timer',
+
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      secondsElapsed: 60
+	    };
+	  },
+
+	  // clear the timer and starts the timer again
+	  resetTimer: function resetTimer() {
+	    if (this.state.secondsElapsed === 0) {
+	      clearInterval(this.interval);
+	    }
+	    this.setState({ secondsElapsed: 60 });
+	    this.start();
+	  },
+
+	  // this function will decrease the timer by 1 second
+	  countDown: function countDown() {
+	    //this.setState is needed to access the countDown.
+	    this.setState({ secondsElapsed: this.state.secondsElapsed - 1 });
+	    if (this.state.secondsElapsed === 0) {
+	      clearInterval(this.interval);
+	    }
+	  },
+
+	  // this starts the timer at different intervals
+	  start: function start() {
+	    this.setState({ secondsElapsed: 60 });
+	    this.interval = setInterval(this.countDown, 1000);
+	  },
+
+	  // sets the countdown delay
+	  componentDidMount: function componentDidMount() {
+	    setTimeout(this.start, this.props.timeout);
+	  },
+
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      this.state.secondsElapsed
+	    );
+	  }
+	});
+
+	module.exports = Timer;
+
+/***/ },
+/* 218 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	//Component
 
 	var Welcome = _react2.default.createClass({
 	  displayName: 'Welcome',
 
 
+	  showQuestionsPage: function showQuestionsPage() {
+	    this.props.history.push('/questions');
+	  },
+
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'container' },
+	      null,
 	      _react2.default.createElement(
-	        'section',
-	        { className: 'sidebar' },
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'Mars'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'logo-container' },
-	          _react2.default.createElement('i', { className: 'fa fa-space-shuttle' })
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'section',
-	        { className: 'content-area' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'timer' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'countdown' },
-	            '10:00'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'button-container' },
-	          _react2.default.createElement(
-	            'button',
-	            null,
-	            'Take the Quiz'
-	          )
-	        )
+	        'button',
+	        { onClick: this.showQuestionsPage },
+	        'Take the Quiz'
 	      )
 	    );
 	  }
@@ -25135,7 +25169,7 @@
 	module.exports = Welcome;
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
