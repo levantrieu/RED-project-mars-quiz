@@ -108,6 +108,10 @@ button {
     color: #fff;
     background: linear-gradient(to left, #fd746c, #ff9068);
   }
+
+  &:active {
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+  }
 }
 
 .timer {

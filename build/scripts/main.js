@@ -25041,6 +25041,16 @@
 	  displayName: 'Questions',
 
 
+	  getInitialState: function getInitialState() {
+	    return {
+	      startup: false
+	    };
+	  },
+
+	  beginTest: function beginTest() {
+	    this.setState({ startup: true });
+	  },
+
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
@@ -25051,16 +25061,40 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'countdown' },
-	          _react2.default.createElement(_timer2.default, null)
+	          _react2.default.createElement(_timer2.default, { start: this.state.startup, startTime: 1 })
 	        )
 	      ),
 	      _react2.default.createElement(
-	        'button',
+	        'div',
 	        null,
-	        'Begin the Quiz'
+	        !this.state.startup ? _react2.default.createElement(
+	          'button',
+	          { className: 'evaluate', onClick: this.beginTest },
+	          'Begin Test'
+	        ) : "",
+	        !this.state.startup ? "" : _react2.default.createElement(TestQuestions, null)
 	      )
 	    );
 	  }
+
+	  //from jill
+	  /*render: function() {
+	    return (
+	      <div>
+	        <div>
+	          <div className="timer">
+	          <Timer start={this.state.startup} startTime={1} />
+	          { !this.state.startup ? <button className="evaluate" onClick={this.beginTest}>Begin Test</button> : ""}
+	          { !this.state.startup ? "" : <TestQuestions /> }
+	          </div>
+	          <div className="countdown">
+	            <Timer />
+	          </div>
+	        </div>
+	        <button>Begin the Quiz</button>
+	      </div>
+	    );
+	  }*/
 	});
 
 	module.exports = Questions;
@@ -25075,6 +25109,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Timer = _react2.default.createClass({
@@ -25082,45 +25120,64 @@
 
 
 	  getInitialState: function getInitialState() {
+	    var seconds = this.getSeconds();
+
 	    return {
-	      secondsElapsed: 60
+	      secondsElapsed: seconds
 	    };
 	  },
 
-	  // clear the timer and starts the timer again
-	  resetTimer: function resetTimer() {
-	    if (this.state.secondsElapsed === 0) {
-	      clearInterval(this.interval);
+	  //this give you the total number of seconds to countdown
+	  getSeconds: function getSeconds() {
+	    if (this.props.startMinutes >= 1) {
+	      return this.props.startMinutes * 60;
+	    } else {
+	      return 60;
 	    }
-	    this.setState({ secondsElapsed: 60 });
-	    this.start();
 	  },
 
-	  // this function will decrease the timer by 1 second
-	  countDown: function countDown() {
-	    //this.setState is needed to access the countDown.
+	  secondsLeft: function secondsLeft() {
+	    return Math.floor(this.state.secondsElapsed % 60);
+	  },
+
+	  minutesLeft: function minutesLeft() {
+	    return Math.floor(this.state.secondsElapsed / 60);
+	  },
+
+	  tick: function tick() {
 	    this.setState({ secondsElapsed: this.state.secondsElapsed - 1 });
-	    if (this.state.secondsElapsed === 0) {
+	    if (this.state.secondsElapsed <= 0) {
 	      clearInterval(this.interval);
 	    }
 	  },
 
-	  // this starts the timer at different intervals
-	  start: function start() {
-	    this.setState({ secondsElapsed: 60 });
-	    this.interval = setInterval(this.countDown, 1000);
+	  componentDidMount: function componentDidMount() {
+	    this.interval = setInterval(this.tick, 1000);
 	  },
 
-	  // sets the countdown delay
-	  componentDidMount: function componentDidMount() {
-	    setTimeout(this.start, this.props.timeout);
+	  //built in React method
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    if (props.start === true) {
+	      this.startTime();
+	    }
 	  },
+
+	  //clear the timer and starts the timer again
+	  /*resetTimer: function() {
+	  if (this.state.secondsElapsed === 0) {
+	  clearInterval(this.interval);
+	  }
+	  this.setState({secondsElapsed: 60});
+	  this.start();
+	  },*/
 
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      this.state.secondsElapsed
+	      this.minutesLeft(),
+	      ':',
+	      this.secondsLeft() < 10 ? "0" + this.secondsLeft() : this.secondsLeft()
 	    );
 	  }
 	});
@@ -25160,7 +25217,7 @@
 	      _react2.default.createElement(
 	        'button',
 	        { onClick: this.showQuestionsPage },
-	        'Take the Quiz'
+	        'Take the Test'
 	      )
 	    );
 	  }

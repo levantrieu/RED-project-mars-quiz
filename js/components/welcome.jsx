@@ -14,7 +14,7 @@ var Welcome = React.createClass({
   render: function() {
     return (
       <div>
-        <button onClick={this.showQuestionsPage}>Take the Quiz</button>
+        <button onClick={this.showQuestionsPage}>Take the Test</button>
       </div>
     );
   }

@@ -1,48 +1,66 @@
 'use strict'
 
 import React from 'react';
+import browserHistory from 'react-dom';
 
 var Timer = React.createClass({
 
   getInitialState: function() {
+    var seconds = this.getSeconds();
+
     return {
-    secondsElapsed: 60
+      secondsElapsed: seconds,
+    };
+  },
+
+  //this give you the total number of seconds to countdown
+  getSeconds: function() {
+    if(this.props.startMinutes >=1) {
+      return this.props.startMinutes * 60;
+    } else {
+      return 60;
     }
   },
 
-  // clear the timer and starts the timer again
-  resetTimer: function() {
-    if (this.state.secondsElapsed === 0) {
-      clearInterval(this.interval);
-    }
-    this.setState({secondsElapsed: 60});
-    this.start();
+  secondsLeft: function() {
+    return Math.floor(this.state.secondsElapsed % 60);
   },
 
-  // this function will decrease the timer by 1 second
-  countDown: function() {
-    //this.setState is needed to access the countDown.
+  minutesLeft: function() {
+    return Math.floor(this.state.secondsElapsed / 60);
+  },
+
+  tick: function() {
     this.setState({secondsElapsed: this.state.secondsElapsed - 1});
-    if (this.state.secondsElapsed === 0) {
+    if (this.state.secondsElapsed <= 0) {
       clearInterval(this.interval);
     }
   },
 
-  // this starts the timer at different intervals
-  start: function() {
-    this.setState({secondsElapsed: 60});
-    this.interval = setInterval(this.countDown, 1000);
+  componentDidMount: function() {
+    this.interval = setInterval(this.tick, 1000);
   },
 
-  // sets the countdown delay
-  componentDidMount: function() {
-    setTimeout(this.start, this.props.timeout);
+  //built in React method
+  componentWillReceiveProps: function(props) {
+    if(props.start === true) {
+      this.startTime();
+    }
   },
+
+  //clear the timer and starts the timer again
+  /*resetTimer: function() {
+  if (this.state.secondsElapsed === 0) {
+  clearInterval(this.interval);
+  }
+  this.setState({secondsElapsed: 60});
+  this.start();
+  },*/
 
   render: function() {
     return (
       <div>
-        {this.state.secondsElapsed}
+        {this.minutesLeft()}:{this.secondsLeft() < 10 ? "0" + this.secondsLeft() : this.secondsLeft()}
       </div>
     );
   }

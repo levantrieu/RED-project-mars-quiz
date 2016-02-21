@@ -212,6 +212,8 @@ button {
   button:hover {
     color: #fff;
     background: linear-gradient(to left, #fd746c, #ff9068); }
+  button:active {
+    box-shadow: 0 0px 0px transparent; }
 
 .timer {
   width: 10rem;
