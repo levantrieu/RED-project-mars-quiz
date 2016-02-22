@@ -7,10 +7,20 @@ import browserHistory from 'react-dom';
 
 var TestQuestions = React.createClass({
 
+  getInitialState: function() {
+    return {
+      marsQuestions: ['How far is Mars?']
+    }
+  },
+
   render: function() {
     return (
-      <div>
-        <button>Next Qusetion</button>
+      <div className="test-question">
+        <div>
+          {this.state.marsQuestions}
+        </div>
+        <input className="test-answer"></input>
+        <button className="submit-button">Submit Answer</button>
       </div>
     );
   }

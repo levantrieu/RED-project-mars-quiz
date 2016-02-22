@@ -56,25 +56,27 @@
 
 	var _reactRouter = __webpack_require__(159);
 
-	var _questions = __webpack_require__(216);
-
-	var _questions2 = _interopRequireDefault(_questions);
-
-	var _welcome = __webpack_require__(218);
+	var _welcome = __webpack_require__(216);
 
 	var _welcome2 = _interopRequireDefault(_welcome);
 
-	var _timer = __webpack_require__(217);
+	var _questions = __webpack_require__(217);
+
+	var _questions2 = _interopRequireDefault(_questions);
+
+	var _testquestions = __webpack_require__(219);
+
+	var _testquestions2 = _interopRequireDefault(_testquestions);
+
+	var _timer = __webpack_require__(218);
 
 	var _timer2 = _interopRequireDefault(_timer);
 
-	var _ = __webpack_require__(219);
+	var _ = __webpack_require__(220);
 
 	var _2 = _interopRequireDefault(_);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	//Components
 
 	var MarsQuiz = _react2.default.createClass({
 	  displayName: 'MarsQuiz',
@@ -87,11 +89,14 @@
 	      _react2.default.createElement(_reactRouter.Redirect, { from: '/', to: '/welcome' }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/welcome', component: _welcome2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/questions', component: _questions2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/test-questions', component: _testquestions2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/timer', component: _timer2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '*', component: _2.default })
 	    );
 	  }
 	});
+
+	//Components
 
 	_reactDom2.default.render(_react2.default.createElement(MarsQuiz, null), document.querySelector('.content-area'));
 
@@ -25025,13 +25030,57 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//Component
+
+	var Welcome = _react2.default.createClass({
+	  displayName: 'Welcome',
+
+
+	  //if a method is only used within this component use the underscore
+	  _handleShowQuestionsPage: function _handleShowQuestionsPage() {
+	    this.props.history.push('/questions');
+	  },
+
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'button',
+	        { onClick: this._handleShowQuestionsPage },
+	        'Take the Test'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Welcome;
+
+/***/ },
+/* 217 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactRouter = __webpack_require__(159);
 
-	var _reactRouter2 = _interopRequireDefault(_reactRouter);
-
-	var _timer = __webpack_require__(217);
+	var _timer = __webpack_require__(218);
 
 	var _timer2 = _interopRequireDefault(_timer);
+
+	var _testquestions = __webpack_require__(219);
+
+	var _testquestions2 = _interopRequireDefault(_testquestions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25057,50 +25106,27 @@
 	      null,
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'timer' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'countdown' },
-	          _react2.default.createElement(_timer2.default, { start: this.state.startup, startTime: 1 })
-	        )
+	        { className: 'countdown' },
+	        _react2.default.createElement(_timer2.default, { start: this.state.startup, startMinutes: 1 })
 	      ),
 	      _react2.default.createElement(
 	        'div',
 	        null,
 	        !this.state.startup ? _react2.default.createElement(
 	          'button',
-	          { className: 'evaluate', onClick: this.beginTest },
+	          { onClick: this.beginTest },
 	          'Begin Test'
 	        ) : "",
-	        !this.state.startup ? "" : _react2.default.createElement(TestQuestions, null)
+	        !this.state.startup ? "" : _react2.default.createElement(_testquestions2.default, null)
 	      )
 	    );
 	  }
-
-	  //from jill
-	  /*render: function() {
-	    return (
-	      <div>
-	        <div>
-	          <div className="timer">
-	          <Timer start={this.state.startup} startTime={1} />
-	          { !this.state.startup ? <button className="evaluate" onClick={this.beginTest}>Begin Test</button> : ""}
-	          { !this.state.startup ? "" : <TestQuestions /> }
-	          </div>
-	          <div className="countdown">
-	            <Timer />
-	          </div>
-	        </div>
-	        <button>Begin the Quiz</button>
-	      </div>
-	    );
-	  }*/
 	});
 
 	module.exports = Questions;
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25109,10 +25135,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(158);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Timer = _react2.default.createClass({
@@ -25120,6 +25142,7 @@
 
 
 	  getInitialState: function getInitialState() {
+
 	    var seconds = this.getSeconds();
 
 	    return {
@@ -25151,33 +25174,33 @@
 	    }
 	  },
 
-	  componentDidMount: function componentDidMount() {
-	    this.interval = setInterval(this.tick, 1000);
-	  },
-
-	  //built in React method
+	  //built in React method. Stops the timer from counting down right away.
 	  componentWillReceiveProps: function componentWillReceiveProps(props) {
 	    if (props.start === true) {
 	      this.startTime();
 	    }
 	  },
 
-	  //clear the timer and starts the timer again
-	  /*resetTimer: function() {
-	  if (this.state.secondsElapsed === 0) {
-	  clearInterval(this.interval);
-	  }
-	  this.setState({secondsElapsed: 60});
-	  this.start();
-	  },*/
+	  //this will stop the memory leak - timer stops counting down and using the CPU
+	  componentWillUnmount: function componentWillUnmount() {
+	    clearInterval(this.interval);
+	  },
+
+	  startTime: function startTime() {
+	    this.interval = setInterval(this.tick, 1000);
+	  },
 
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
-	      this.minutesLeft(),
-	      ':',
-	      this.secondsLeft() < 10 ? "0" + this.secondsLeft() : this.secondsLeft()
+	      { className: this.props.start ? "timer" : "timer hidden" },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'countdown' },
+	        this.minutesLeft(),
+	        ':',
+	        this.secondsLeft() < 10 ? "0" + this.secondsLeft() : this.secondsLeft()
+	      )
 	    );
 	  }
 	});
@@ -25185,7 +25208,7 @@
 	module.exports = Timer;
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25202,31 +25225,39 @@
 
 	//Component
 
-	var Welcome = _react2.default.createClass({
-	  displayName: 'Welcome',
+	var TestQuestions = _react2.default.createClass({
+	  displayName: 'TestQuestions',
 
 
-	  showQuestionsPage: function showQuestionsPage() {
-	    this.props.history.push('/questions');
+	  getInitialState: function getInitialState() {
+	    return {
+	      marsQuestions: ['How far is Mars?']
+	    };
 	  },
 
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'test-question' },
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        this.state.marsQuestions
+	      ),
+	      _react2.default.createElement('input', { className: 'test-answer' }),
 	      _react2.default.createElement(
 	        'button',
-	        { onClick: this.showQuestionsPage },
-	        'Take the Test'
+	        { className: 'submit-button' },
+	        'Submit Answer'
 	      )
 	    );
 	  }
 	});
 
-	module.exports = Welcome;
+	module.exports = TestQuestions;
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

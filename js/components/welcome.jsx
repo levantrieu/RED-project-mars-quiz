@@ -7,14 +7,15 @@ import browserHistory from 'react-dom';
 
 var Welcome = React.createClass({
 
-  showQuestionsPage: function() {
+//if a method is only used within this component use the underscore
+  _handleShowQuestionsPage: function() {
   this.props.history.push('/questions')
   },
 
   render: function() {
     return (
       <div>
-        <button onClick={this.showQuestionsPage}>Take the Test</button>
+        <button onClick={this._handleShowQuestionsPage}>Take the Test</button>
       </div>
     );
   }

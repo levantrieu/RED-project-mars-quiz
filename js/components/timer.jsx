@@ -1,11 +1,11 @@
 'use strict'
 
 import React from 'react';
-import browserHistory from 'react-dom';
 
 var Timer = React.createClass({
 
   getInitialState: function() {
+
     var seconds = this.getSeconds();
 
     return {
@@ -37,30 +37,28 @@ var Timer = React.createClass({
     }
   },
 
-  componentDidMount: function() {
-    this.interval = setInterval(this.tick, 1000);
-  },
-
-  //built in React method
+  //built in React method. Stops the timer from counting down right away.
   componentWillReceiveProps: function(props) {
     if(props.start === true) {
       this.startTime();
     }
   },
 
-  //clear the timer and starts the timer again
-  /*resetTimer: function() {
-  if (this.state.secondsElapsed === 0) {
-  clearInterval(this.interval);
-  }
-  this.setState({secondsElapsed: 60});
-  this.start();
-  },*/
+//this will stop the memory leak - timer stops counting down and using the CPU
+  componentWillUnmount: function() {
+    clearInterval(this.interval)
+  },
+
+  startTime: function() {
+    this.interval = setInterval(this.tick, 1000);
+  },
 
   render: function() {
     return (
-      <div>
-        {this.minutesLeft()}:{this.secondsLeft() < 10 ? "0" + this.secondsLeft() : this.secondsLeft()}
+      <div className={this.props.start ? "timer" : "timer hidden"}>
+        <div className="countdown">
+          {this.minutesLeft()}:{this.secondsLeft() < 10 ? "0" + this.secondsLeft() : this.secondsLeft()}
+        </div>
       </div>
     );
   }
