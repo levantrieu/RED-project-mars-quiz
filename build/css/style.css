@@ -110,6 +110,9 @@ img {
           justify-content: space-between;
   overflow: hidden; }
 
+/**
+ *** side bar styles
+**/
 .sidebar {
   display: none; }
   @media all and (min-width: 640px) {
@@ -170,6 +173,9 @@ h1 {
           align-items: center;
   text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 0 #9A9A9A, 0 7px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15); }
 
+/**
+ *** content area styles
+**/
 .content-area {
   width: 100%;
   background: linear-gradient(to right, #fd746c, #ff9068);
@@ -216,6 +222,9 @@ button {
   button:active {
     box-shadow: 0 0px 0px transparent; }
 
+/**
+ *** timer styles
+**/
 .timer {
   width: 10rem;
   height: 3.5rem;
@@ -251,6 +260,9 @@ button {
       -ms-flex-align: center;
           align-items: center; }
 
+/**
+ *** test styles
+**/
 .test-question {
   font-family: 'Open Sans', sans-serif;
   font-size: 1.25rem;
@@ -283,3 +295,106 @@ button {
   position: absolute;
   right: 2rem;
   bottom: 2rem; }
+
+/**
+ *** results styles
+**/
+h2 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: -0.3rem;
+  -webkit-animation: pulse 1s ease infinite;
+          animation: pulse 1s ease infinite; }
+
+@-webkit-keyframes pulse {
+  0% {
+    opacity: 0; }
+  20% {
+    opacity: 0.2; }
+  30% {
+    opacity: 0.3; }
+  40% {
+    opacity: 0.4; }
+  50% {
+    opacity: 0.5; }
+  75% {
+    opacity: 0.75; }
+  100% {
+    opacity: 1; } }
+
+@keyframes pulse {
+  0% {
+    opacity: 0; }
+  20% {
+    opacity: 0.2; }
+  30% {
+    opacity: 0.3; }
+  40% {
+    opacity: 0.4; }
+  50% {
+    opacity: 0.5; }
+  75% {
+    opacity: 0.75; }
+  100% {
+    opacity: 1; } }
+
+.accepted-bkg {
+  width: 100%;
+  height: 100vh;
+  color: #128282;
+  background: linear-gradient(to right, #1EA5A5, #70B99E);
+  position: relative;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+.spaceship-icon {
+  z-index: 100;
+  padding-left: 6.5rem; }
+
+.accept-spaceship {
+  font-size: 10rem;
+  color: #fff;
+  -webkit-animation: takeoff 5s ease infinite;
+          animation: takeoff 5s ease infinite;
+  position: absolute;
+  bottom: -600; }
+
+@-webkit-keyframes takeoff {
+  0% {
+    -webkit-transform: translateY(1000px) rotate(270deg);
+            transform: translateY(1000px) rotate(270deg); }
+  100% {
+    -webkit-transform: translateY(-600px) rotate(270deg);
+            transform: translateY(-600px) rotate(270deg); } }
+
+@keyframes takeoff {
+  0% {
+    -webkit-transform: translateY(1000px) rotate(270deg);
+            transform: translateY(1000px) rotate(270deg); }
+  100% {
+    -webkit-transform: translateY(-600px) rotate(270deg);
+            transform: translateY(-600px) rotate(270deg); } }
+
+.fail-bkg {
+  width: 100%;
+  height: 100vh;
+  color: #801100;
+  background: linear-gradient(to right, #D8381F, #D85129);
+  position: relative;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+.results {
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center; }

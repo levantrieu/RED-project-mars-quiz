@@ -6,6 +6,10 @@
   overflow: hidden;
 }
 
+/**
+ *** side bar styles
+**/
+
 .sidebar {
   display: none;
 
@@ -68,6 +72,10 @@ h1 {
                0 20px 20px rgba(0, 0, 0, 0.15);
 }
 
+/**
+ *** content area styles
+**/
+
 .content-area {
   width: 100%;
   background: linear-gradient(to right, #fd746c, #ff9068);
@@ -115,6 +123,10 @@ button {
   }
 }
 
+/**
+ *** timer styles
+**/
+
 .timer {
   width:10rem;
   height: 3.5rem;
@@ -144,6 +156,10 @@ button {
   flex-wrap: nowrap;
   align-items: center;
 }
+
+/**
+ *** test styles
+**/
 
 .test-question {
   font-family: 'Open Sans', sans-serif;
@@ -181,4 +197,87 @@ button {
   position: absolute;
   right: 2rem;
   bottom: 2rem;
+}
+
+/**
+ *** results styles
+**/
+
+h2 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: -0.3rem;
+  animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.2;
+  }
+  30% {
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.accepted-bkg {
+  width: 100%;
+  height: 100vh;
+  color: rgba(18, 130, 130, 1);
+  background: linear-gradient(to right, #1EA5A5, #70B99E);
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.spaceship-icon {
+  z-index: 100;
+  padding-left: 6.5rem;
+}
+
+.accept-spaceship {
+  font-size: 10rem;
+  color: #fff;
+  animation: takeoff 5s ease infinite;
+  position: absolute;
+  bottom: -600;
+}
+
+@keyframes takeoff {
+  0% {
+    transform: translateY(1000px)rotate(270deg);
+  }
+  100% {
+    transform: translateY(-600px)rotate(270deg);
+  }
+}
+
+.fail-bkg {
+  width: 100%;
+  height: 100vh;
+  color: rgba(128, 17, 0, 1);
+  background: linear-gradient(to right, #D8381F, #D85129);
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.results {
+  align-self: center;
 }

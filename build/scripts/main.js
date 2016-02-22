@@ -25327,14 +25327,19 @@
 
 	var Rejected = React.createClass({
 	  displayName: 'Rejected',
-	  getInitialState: function getInitialState() {
-	    return "";
-	  },
 	  render: function render() {
 	    return React.createElement(
 	      'div',
-	      null,
-	      'Rejected'
+	      { className: 'fail-bkg' },
+	      React.createElement(
+	        'div',
+	        { className: 'results' },
+	        React.createElement(
+	          'h2',
+	          null,
+	          'Rejected'
+	        )
+	      )
 	    );
 	  }
 	});
@@ -25354,14 +25359,24 @@
 
 	var Accepted = React.createClass({
 	  displayName: 'Accepted',
-	  getInitialState: function getInitialState() {
-	    return "";
-	  },
 	  render: function render() {
 	    return React.createElement(
 	      'div',
-	      null,
-	      'Accepted'
+	      { className: 'accepted-bkg' },
+	      React.createElement(
+	        'div',
+	        { className: 'results' },
+	        React.createElement(
+	          'h2',
+	          null,
+	          'Accepted'
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'accept-spaceship' },
+	          React.createElement('i', { className: 'fa fa-space-shuttle spaceship-icon' })
+	        )
+	      )
 	    );
 	  }
 	});

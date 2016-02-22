@@ -3,13 +3,13 @@ import {browserHistory} from 'react-router';
 
 var Rejected = React.createClass ({
 
-  getInitialState() {
-    return ""
-  },
-
   render() {
     return (
-      <div>Rejected</div>
+      <div className="fail-bkg">
+        <div className="results">
+          <h2>Rejected</h2>
+        </div>
+      </div>
     )
   }
 });
