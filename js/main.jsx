@@ -8,8 +8,10 @@ import { Router, Route, browserHistory, Redirect } from 'react-router';
 
 import Welcome   from './components/welcome.jsx';
 import Questions from './components/questions.jsx';
-import TestQuestions from './components/testquestions.jsx';
+import TakeTest from './components/taketest.jsx';
 import Timer   from './components/timer.jsx';
+import Rejected from './components/rejected.jsx';
+import Accepted from './components/accepted.jsx';
 import NotFound  from './components/404.jsx';
 
 var MarsQuiz = React.createClass({
@@ -20,7 +22,9 @@ var MarsQuiz = React.createClass({
         <Redirect from='/' to='/welcome' />
         <Route path='/welcome' component={Welcome} />
         <Route path='/questions' component={Questions} />
-        <Route path='/test-questions' component={TestQuestions} />
+        <Route path='/take-test' component={TakeTest} />
+        <Route path='/rejected' component={Rejected} />
+        <Route path='/accepted' component={Accepted} />
         <Route path='/timer' component={Timer} />
         <Route path='*' component={NotFound} />
       </Router>

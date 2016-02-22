@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react';
-import browserHistory from 'react-dom';
+import {browserHistory} from 'react-router';
 
 //Component
 
@@ -9,7 +9,7 @@ var Welcome = React.createClass({
 
 //if a method is only used within this component use the underscore
   _handleShowQuestionsPage: function() {
-  this.props.history.push('/questions')
+  browserHistory.push('/questions');
   },
 
   render: function() {

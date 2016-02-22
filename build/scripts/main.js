@@ -64,15 +64,23 @@
 
 	var _questions2 = _interopRequireDefault(_questions);
 
-	var _testquestions = __webpack_require__(219);
+	var _taketest = __webpack_require__(219);
 
-	var _testquestions2 = _interopRequireDefault(_testquestions);
+	var _taketest2 = _interopRequireDefault(_taketest);
 
 	var _timer = __webpack_require__(218);
 
 	var _timer2 = _interopRequireDefault(_timer);
 
-	var _ = __webpack_require__(220);
+	var _rejected = __webpack_require__(220);
+
+	var _rejected2 = _interopRequireDefault(_rejected);
+
+	var _accepted = __webpack_require__(221);
+
+	var _accepted2 = _interopRequireDefault(_accepted);
+
+	var _ = __webpack_require__(222);
 
 	var _2 = _interopRequireDefault(_);
 
@@ -89,7 +97,9 @@
 	      _react2.default.createElement(_reactRouter.Redirect, { from: '/', to: '/welcome' }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/welcome', component: _welcome2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/questions', component: _questions2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: '/test-questions', component: _testquestions2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/take-test', component: _taketest2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/rejected', component: _rejected2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/accepted', component: _accepted2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/timer', component: _timer2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '*', component: _2.default })
 	    );
@@ -25030,9 +25040,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(158);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
+	var _reactRouter = __webpack_require__(159);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25044,7 +25052,7 @@
 
 	  //if a method is only used within this component use the underscore
 	  _handleShowQuestionsPage: function _handleShowQuestionsPage() {
-	    this.props.history.push('/questions');
+	    _reactRouter.browserHistory.push('/questions');
 	  },
 
 	  render: function render() {
@@ -25068,25 +25076,24 @@
 
 	'use strict';
 
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
 	var _reactRouter = __webpack_require__(159);
 
 	var _timer = __webpack_require__(218);
 
 	var _timer2 = _interopRequireDefault(_timer);
 
-	var _testquestions = __webpack_require__(219);
+	var _taketest = __webpack_require__(219);
 
-	var _testquestions2 = _interopRequireDefault(_testquestions);
+	var _taketest2 = _interopRequireDefault(_taketest);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var React = __webpack_require__(1);
+
+
 	//Component
 
-	var Questions = _react2.default.createClass({
+	var Questions = React.createClass({
 	  displayName: 'Questions',
 
 
@@ -25096,28 +25103,53 @@
 	    };
 	  },
 
+	  _handleCorrect: function _handleCorrect() {
+	    _reactRouter.browserHistory.push('/accepted');
+	  },
+
+	  _handleFail: function _handleFail() {
+	    _reactRouter.browserHistory.push('/rejected');
+	  },
+
 	  beginTest: function beginTest() {
 	    this.setState({ startup: true });
 	  },
 
 	  render: function render() {
-	    return _react2.default.createElement(
+
+	    var testQuestions = [{
+	      question: "Is Mars fourth from the sun?",
+	      answer: "Yes"
+	    }, {
+	      question: "Does Mars have subsurface water?",
+	      answer: "Yes"
+	    }, {
+	      question: "Does Mars have seasons?",
+	      answer: "Yes"
+	    }];
+
+	    return React.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(
+	      React.createElement(
 	        'div',
 	        { className: 'countdown' },
-	        _react2.default.createElement(_timer2.default, { start: this.state.startup, startMinutes: 1 })
+	        React.createElement(_timer2.default, {
+	          start: this.state.startup,
+	          startMinutes: 1,
+	          onTimerFinished: this._handleFail })
 	      ),
-	      _react2.default.createElement(
+	      React.createElement(
 	        'div',
 	        null,
-	        !this.state.startup ? _react2.default.createElement(
+	        !this.state.startup ? React.createElement(
 	          'button',
 	          { onClick: this.beginTest },
 	          'Begin Test'
 	        ) : "",
-	        !this.state.startup ? "" : _react2.default.createElement(_testquestions2.default, null)
+	        !this.state.startup ? "" : React.createElement(_taketest2.default, { onCorrect: this._handleCorrect,
+	          onFail: this._handleFail,
+	          testQuestions: testQuestions })
 	      )
 	    );
 	  }
@@ -25213,51 +25245,131 @@
 
 	'use strict';
 
-	var _react = __webpack_require__(1);
+	var _reactRouter = __webpack_require__(159);
 
-	var _react2 = _interopRequireDefault(_react);
+	var _questions = __webpack_require__(217);
 
-	var _reactDom = __webpack_require__(158);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
+	var _questions2 = _interopRequireDefault(_questions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var React = __webpack_require__(1);
+
+
 	//Component
 
-	var TestQuestions = _react2.default.createClass({
-	  displayName: 'TestQuestions',
+	var TakeTest = React.createClass({
+	  displayName: 'TakeTest',
 
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      marsQuestions: ['How far is Mars?']
+	      correctCount: 0,
+	      questionIndex: 0
 	    };
 	  },
 
+	  componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
+	    if (nextState.questionIndex === nextProps.testQuestions.length) {
+	      this.state.correctCount === 2 ? this.props.onCorrect() : this.props.onFail();
+	    }
+	  },
+
+
 	  render: function render() {
-	    return _react2.default.createElement(
+
+	    return React.createElement(
 	      'div',
 	      { className: 'test-question' },
-	      _react2.default.createElement(
+	      React.createElement(
 	        'div',
 	        null,
-	        this.state.marsQuestions
+	        React.createElement(_questions2.default, {
+	          currentQuestion: this.props.testQuestions[this.state.questionIndex],
+	          onAnswer: this._handleUserAnswer })
 	      ),
-	      _react2.default.createElement('input', { className: 'test-answer' }),
-	      _react2.default.createElement(
+	      React.createElement('input', { className: 'test-answer' }),
+	      React.createElement(
 	        'button',
 	        { className: 'submit-button' },
 	        'Submit Answer'
 	      )
 	    );
+	  },
+
+	  _handleUserAnswer: function _handleUserAnswer(userAnswer) {
+	    var correctAnswer = this.props.testQuestions[this.state.questionIndex].answer;
+	    var currentCorrectCount = this.state.correctCount;
+
+	    if (correctAnswer === userAnswer) {
+	      currentCorrectCount = currentCorrectCount + 1;
+	    }
+
+	    this.setState({
+	      correctCount: currentCorrectCount,
+	      questionIndex: this.state.questionIndex + 1
+	    });
 	  }
 	});
 
-	module.exports = TestQuestions;
+	module.exports = TakeTest;
 
 /***/ },
 /* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _reactRouter = __webpack_require__(159);
+
+	var React = __webpack_require__(1);
+
+
+	var Rejected = React.createClass({
+	  displayName: 'Rejected',
+	  getInitialState: function getInitialState() {
+	    return "";
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      'Rejected'
+	    );
+	  }
+	});
+
+	module.exports = Rejected;
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _reactRouter = __webpack_require__(159);
+
+	var React = __webpack_require__(1);
+
+
+	var Accepted = React.createClass({
+	  displayName: 'Accepted',
+	  getInitialState: function getInitialState() {
+	    return "";
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      'Accepted'
+	    );
+	  }
+	});
+
+	module.exports = Accepted;
+
+/***/ },
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
