@@ -64,23 +64,23 @@
 
 	var _questions2 = _interopRequireDefault(_questions);
 
-	var _taketest = __webpack_require__(219);
+	var _questionpane = __webpack_require__(219);
 
-	var _taketest2 = _interopRequireDefault(_taketest);
+	var _questionpane2 = _interopRequireDefault(_questionpane);
 
 	var _timer = __webpack_require__(218);
 
 	var _timer2 = _interopRequireDefault(_timer);
 
-	var _rejected = __webpack_require__(220);
+	var _rejected = __webpack_require__(221);
 
 	var _rejected2 = _interopRequireDefault(_rejected);
 
-	var _accepted = __webpack_require__(221);
+	var _accepted = __webpack_require__(222);
 
 	var _accepted2 = _interopRequireDefault(_accepted);
 
-	var _ = __webpack_require__(222);
+	var _ = __webpack_require__(223);
 
 	var _2 = _interopRequireDefault(_);
 
@@ -97,7 +97,7 @@
 	      _react2.default.createElement(_reactRouter.Redirect, { from: '/', to: '/welcome' }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/welcome', component: _welcome2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/questions', component: _questions2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: '/take-test', component: _taketest2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/questionpane', component: _questionpane2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/rejected', component: _rejected2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/accepted', component: _accepted2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/timer', component: _timer2.default }),
@@ -25082,9 +25082,9 @@
 
 	var _timer2 = _interopRequireDefault(_timer);
 
-	var _taketest = __webpack_require__(219);
+	var _questionpane = __webpack_require__(219);
 
-	var _taketest2 = _interopRequireDefault(_taketest);
+	var _questionpane2 = _interopRequireDefault(_questionpane);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25093,8 +25093,19 @@
 
 	//Component
 
-	var Questions = React.createClass({
-	  displayName: 'Questions',
+	var testQuestions = [{
+	  question: "Is Mars fourth from the sun?",
+	  answer: "Yes"
+	}, {
+	  question: "Does Mars have subsurface water?",
+	  answer: "Yes"
+	}, {
+	  question: "Does Mars have seasons?",
+	  answer: "Yes"
+	}];
+
+	var Taketest = React.createClass({
+	  displayName: 'Taketest',
 
 
 	  getInitialState: function getInitialState() {
@@ -25117,17 +25128,6 @@
 
 	  render: function render() {
 
-	    var testQuestions = [{
-	      question: "Is Mars fourth from the sun?",
-	      answer: "Yes"
-	    }, {
-	      question: "Does Mars have subsurface water?",
-	      answer: "Yes"
-	    }, {
-	      question: "Does Mars have seasons?",
-	      answer: "Yes"
-	    }];
-
 	    return React.createElement(
 	      'div',
 	      null,
@@ -25142,12 +25142,13 @@
 	      React.createElement(
 	        'div',
 	        null,
-	        !this.state.startup ? React.createElement(
+	        !this.state.startup && React.createElement(
 	          'button',
 	          { onClick: this.beginTest },
 	          'Begin Test'
-	        ) : "",
-	        !this.state.startup ? "" : React.createElement(_taketest2.default, { onCorrect: this._handleCorrect,
+	        ),
+	        this.state.startup && React.createElement(_questionpane2.default, {
+	          onCorrect: this._handleCorrect,
 	          onFail: this._handleFail,
 	          testQuestions: testQuestions })
 	      )
@@ -25155,7 +25156,7 @@
 	  }
 	});
 
-	module.exports = Questions;
+	module.exports = Taketest;
 
 /***/ },
 /* 218 */
@@ -25247,9 +25248,9 @@
 
 	var _reactRouter = __webpack_require__(159);
 
-	var _questions = __webpack_require__(217);
+	var _currentquestion = __webpack_require__(220);
 
-	var _questions2 = _interopRequireDefault(_questions);
+	var _currentquestion2 = _interopRequireDefault(_currentquestion);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25258,8 +25259,8 @@
 
 	//Component
 
-	var TakeTest = React.createClass({
-	  displayName: 'TakeTest',
+	var Questionpane = React.createClass({
+	  displayName: 'Questionpane',
 
 
 	  getInitialState: function getInitialState() {
@@ -25284,7 +25285,7 @@
 	      React.createElement(
 	        'div',
 	        null,
-	        React.createElement(_questions2.default, {
+	        React.createElement(_currentquestion2.default, {
 	          currentQuestion: this.props.testQuestions[this.state.questionIndex],
 	          onAnswer: this._handleUserAnswer })
 	      ),
@@ -25312,10 +25313,51 @@
 	  }
 	});
 
-	module.exports = TakeTest;
+	module.exports = Questionpane;
 
 /***/ },
 /* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var CurrentQuestion = _react2.default.createClass({
+	  displayName: "CurrentQuestion",
+	  _handleRightAnswer: function _handleRightAnswer() {
+	    this.props.onAnswer("Yes");
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      "div",
+	      null,
+	      _react2.default.createElement(
+	        "p",
+	        null,
+	        this.props.currentQuestion.question
+	      ),
+	      _react2.default.createElement("button", { onClick: this._handleRightAnswer })
+	    );
+	  }
+	});
+
+	CurrentQuestion.propTypes = {
+	  currentQuestion: _react2.default.PropTypes.shape({
+	    question: _react2.default.PropTypes.string.isRequired,
+	    answer: _react2.default.PropTypes.string.isRequired
+	  }).isRequired,
+	  onAnswer: _react2.default.PropTypes.func.isRequired
+	};
+
+	module.exports = CurrentQuestion;
+
+/***/ },
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25347,7 +25389,7 @@
 	module.exports = Rejected;
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25384,7 +25426,7 @@
 	module.exports = Accepted;
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

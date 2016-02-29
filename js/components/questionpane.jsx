@@ -2,11 +2,11 @@
 
 var React = require('react');
 import {browserHistory} from 'react-router';
-import Questions from './questions.jsx';
+import CurrentQuestion from './currentquestion.jsx';
 
 //Component
 
-var TakeTest = React.createClass({
+var Questionpane = React.createClass({
 
   getInitialState: function() {
     return {
@@ -26,7 +26,7 @@ var TakeTest = React.createClass({
     return (
       <div className="test-question">
         <div>
-          <Questions
+          <CurrentQuestion
             currentQuestion={this.props.testQuestions[this.state.questionIndex]}
             onAnswer={this._handleUserAnswer} />
         </div>
@@ -51,4 +51,4 @@ var TakeTest = React.createClass({
   }
 });
 
-module.exports = TakeTest;
+module.exports = Questionpane;

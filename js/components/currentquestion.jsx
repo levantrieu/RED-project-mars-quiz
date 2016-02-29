@@ -11,6 +11,7 @@ var CurrentQuestion = React.createClass({
       <div>
         <p>{this.props.currentQuestion.question}</p>
         <button onClick={this._handleRightAnswer}></button>
+
       </div>
     );
   }
