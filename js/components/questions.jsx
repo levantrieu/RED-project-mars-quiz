@@ -6,8 +6,6 @@ import {browserHistory} from 'react-router';
 import Timer from './timer.jsx';
 import Questionpane from './questionpane.jsx';
 
-
-
 //Component
 
 var testQuestions = [

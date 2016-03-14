@@ -1,7 +1,6 @@
 'use strict'
 
 var React = require('react');
-import {browserHistory} from 'react-router';
 import CurrentQuestion from './currentquestion.jsx';
 
 //Component
@@ -30,8 +29,7 @@ var Questionpane = React.createClass({
             currentQuestion={this.props.testQuestions[this.state.questionIndex]}
             onAnswer={this._handleUserAnswer} />
         </div>
-        <input className="test-answer"></input>
-        <button className="submit-button">Submit Answer</button>
+
       </div>
     );
   },

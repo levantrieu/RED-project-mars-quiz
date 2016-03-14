@@ -8,10 +8,11 @@ var CurrentQuestion = React.createClass({
 
   render() {
     return (
+
       <div>
         <p>{this.props.currentQuestion.question}</p>
-        <button onClick={this._handleRightAnswer}></button>
-
+        <input className="test-answer"></input>
+        <button className="submit-button" onClick={this._handleRightAnswer}>Submit Answer</button>
       </div>
     );
   }

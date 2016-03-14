@@ -25,7 +25,6 @@ var MarsQuiz = React.createClass({
         <Route path='/questionpane' component={Questionpane} />
         <Route path='/rejected' component={Rejected} />
         <Route path='/accepted' component={Accepted} />
-        <Route path='/timer' component={Timer} />
         <Route path='*' component={NotFound} />
       </Router>
     )

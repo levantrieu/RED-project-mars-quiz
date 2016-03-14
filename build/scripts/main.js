@@ -100,7 +100,6 @@
 	      _react2.default.createElement(_reactRouter.Route, { path: '/questionpane', component: _questionpane2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/rejected', component: _rejected2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/accepted', component: _accepted2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: '/timer', component: _timer2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '*', component: _2.default })
 	    );
 	  }
@@ -25246,8 +25245,6 @@
 
 	'use strict';
 
-	var _reactRouter = __webpack_require__(159);
-
 	var _currentquestion = __webpack_require__(220);
 
 	var _currentquestion2 = _interopRequireDefault(_currentquestion);
@@ -25288,12 +25285,6 @@
 	        React.createElement(_currentquestion2.default, {
 	          currentQuestion: this.props.testQuestions[this.state.questionIndex],
 	          onAnswer: this._handleUserAnswer })
-	      ),
-	      React.createElement('input', { className: 'test-answer' }),
-	      React.createElement(
-	        'button',
-	        { className: 'submit-button' },
-	        'Submit Answer'
 	      )
 	    );
 	  },
@@ -25341,7 +25332,12 @@
 	        null,
 	        this.props.currentQuestion.question
 	      ),
-	      _react2.default.createElement("button", { onClick: this._handleRightAnswer })
+	      _react2.default.createElement("input", { className: "test-answer" }),
+	      _react2.default.createElement(
+	        "button",
+	        { className: "submit-button", onClick: this._handleRightAnswer },
+	        "Submit Answer"
+	      )
 	    );
 	  }
 	});
