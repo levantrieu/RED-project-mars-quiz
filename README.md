@@ -1,6 +1,6 @@
 # React Quiz App Project
 
-Please view the site deployed site on [GitHub Pages.](http://levantrieu.github.io/RED-project-mars-quiz)
+Please view the site deployed site on [Firebase.](https://mars-quiz.firebaseapp.com)
 
 **Project Brief**
 
