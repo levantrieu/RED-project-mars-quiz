@@ -18,6 +18,10 @@ gulp.task('compile-react', function() {
 			output: {
 				filename: 'main.js'
 			},
+			//tool to help with debugging
+			debug: true,
+			//source map shows uncompiled/unminified code for readablility when looking in the console
+			devtool: 'inline-source-map',
 			module: {
 				loaders: [{
 					test: /\.jsx?$/,

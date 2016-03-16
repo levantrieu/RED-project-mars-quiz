@@ -6,13 +6,13 @@ import { Router, Route, browserHistory, Redirect } from 'react-router';
 
 //Components
 
-import Welcome   from './components/welcome.jsx';
-import Questions from './components/questions.jsx';
+import Welcome      from './components/welcome.jsx';
+import Questions    from './components/questions.jsx';
 import Questionpane from './components/questionpane.jsx';
-import Timer   from './components/timer.jsx';
-import Rejected from './components/rejected.jsx';
-import Accepted from './components/accepted.jsx';
-import NotFound  from './components/404.jsx';
+import Timer        from './components/timer.jsx';
+import Rejected     from './components/rejected.jsx';
+import Accepted     from './components/accepted.jsx';
+import NotFound     from './components/404.jsx';
 
 var MarsQuiz = React.createClass({
 

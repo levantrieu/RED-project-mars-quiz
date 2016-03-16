@@ -1,29 +1,31 @@
 'use strict'
 
 var React = require('react');
-import {browserHistory} from 'react-router';
 
 import Timer from './timer.jsx';
 import Questionpane from './questionpane.jsx';
 
-//Component
-
 var testQuestions = [
   {
     question: "Is Mars fourth from the sun?",
-    answer: "Yes"
+    answer: "yes"
   },
   {
     question: "Does Mars have subsurface water?",
-    answer: "Yes"
+    answer: "yes"
   },
   {
     question: "Does Mars have seasons?",
-    answer: "Yes"
-  }
+    answer: "yes"
+  },
 ];
 
 var Taketest = React.createClass({
+
+  // this replaced browserHistory
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
 
   getInitialState: function() {
     return {
@@ -32,11 +34,11 @@ var Taketest = React.createClass({
   },
 
   _handleCorrect: function() {
-    browserHistory.push('/accepted');
+    this.context.router.push('/accepted');
   },
 
   _handleFail: function() {
-    browserHistory.push('/rejected');
+    this.context.router.push('/rejected');
   },
 
   beginTest: function() {
@@ -57,12 +59,11 @@ var Taketest = React.createClass({
           {!this.state.startup && <button onClick={this.beginTest}>Begin Test</button>}
           {this.state.startup &&
             <Questionpane
+              questions={testQuestions}
               onCorrect={this._handleCorrect}
-              onFail={this._handleFail}
-              testQuestions={testQuestions} />
+              onFail={this._handleFail} />
           }
         </div>
-
       </div>
     );
   }

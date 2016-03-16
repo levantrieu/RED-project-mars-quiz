@@ -37,12 +37,17 @@ var Timer = React.createClass({
     }
   },
 
-  //built in React method. Stops the timer from counting down right away.
+//built in React method. Stops the timer from counting down right away.
   componentWillReceiveProps: function(props) {
     if(props.start === true) {
       this.startTime();
     }
   },
+
+// this will check if timer is at 0 secs and will run onTimerFinished functio and load rejected page.
+  componentDidUpdate(prevProps, prevState) {
+  if (this.state.secondsElapsed === 0) this.props.onTimerFinished();
+},
 
 //this will stop the memory leak - timer stops counting down and using the CPU
   componentWillUnmount: function() {

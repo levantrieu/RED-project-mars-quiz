@@ -1,7 +1,14 @@
+'use strict'
+
 var React = require('react');
-import {browserHistory} from 'react-router';
 
 var Accepted = React.createClass ({
+
+  getInitialState: function() {
+    return {
+      state: true,
+    };
+  },
 
   render() {
     return (
