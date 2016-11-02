@@ -142,8 +142,8 @@ h1 {
   text-transform: uppercase;
   letter-spacing: -0.6rem;
   color: #EDF1F2;
-  -webkit-transform: translateX(-75px) rotate(270deg);
-          transform: translateX(-75px) rotate(270deg);
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
   position: absolute;
   top: 100px;
   display: block;
